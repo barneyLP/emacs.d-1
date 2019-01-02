@@ -8,11 +8,10 @@
   :commands (hydra-flycheck/body)
   :hook (after-init . global-flycheck-mode)
   :init
-  (kevin/declare-prefix "e" "flycheck")
-  (kevin/set-leader-keys "ec" #'flycheck-buffer)
-  (kevin/set-leader-keys "el" #'flycheck-list-errors)
-  (kevin/set-leader-keys "ep" #'flycheck-previous-error)
-  (kevin/set-leader-keys "en" #'flycheck-next-error)
+  (kevin/normal-state-prefix "ec" #'flycheck-buffer)
+  (kevin/normal-state-prefix "el" #'flycheck-list-errors)
+  (kevin/normal-state-prefix "ep" #'flycheck-previous-error)
+  (kevin/normal-state-prefix "en" #'flycheck-next-error)
   (setq flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc))
   (setq flycheck-emacs-lisp-check-declare t)
   (setq flycheck-indication-mode 'right-fringe)
@@ -49,7 +48,7 @@
   :after (avy flycheck)
   :init
   (avy-flycheck-setup)
-  (kevin/set-leader-keys "eg" #'avy-flycheck-goto-error))
+  (kevin/normal-state-prefix "eg" #'avy-flycheck-goto-error))
 
 (use-package flycheck-posframe
   :ensure t

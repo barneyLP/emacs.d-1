@@ -11,12 +11,12 @@
   :ensure nil
   :init
   (setq bookmark-default-file (concat kevin-cache-directory "bookmarks"))
-  (kevin/declare-prefix "m" "bookmark")
-  (kevin/set-leader-keys "ms" 'bookmark-set
-                         "mr" 'bookmark-rename
-                         "md" 'bookmark-delete
-                         "mj" 'counsel-bookmark
-                         "ml" 'bookmark-bmenu-list))
+  (kevin/normal-state-prefix
+    "ms" 'bookmark-set
+    "mr" 'bookmark-rename
+    "md" 'bookmark-delete
+    "mj" 'counsel-bookmark
+    "ml" 'bookmark-bmenu-list))
 
 ;; Elec pair
 (use-package elec-pair
@@ -81,19 +81,20 @@
   :defer t
   :ensure t
   :hook (after-init . avy-setup-default)
-  :init
-  (kevin/set-leader-keys
-   "jc" 'avy-goto-char-2
-   "jw" 'avy-goto-word-or-subword-1
-   "jl" 'avy-goto-line
-   "jp" #'kevin/goto-match-parent)
+  :general
+  (kevin/normal-state-prefix
+    "jc" 'avy-goto-char-2
+    "jw" 'avy-goto-word-or-subword-1
+    "jl" 'avy-goto-line
+    "jp" #'kevin/goto-match-parent)
   :config (setq avy-background t))
 
 ;; Quickly follow links
 (use-package ace-link
   :defer t
   :ensure t
-  :bind (("M-o" . ace-link-addr))
+  :general
+  ("M-o" 'ace-link-addr)
   :init (add-hook 'after-init-hook #'ace-link-setup-default))
 
 ;; Minor mode to aggressively keep your code always indented
@@ -128,7 +129,8 @@
 (use-package comment-dwim-2
   :defer t
   :ensure t
-  :bind ("M-;" . comment-dwim-2))
+  :general
+  ("M-;" 'comment-dwim-2))
 
 ;; Drag stuff (lines, words, region, etc...) around
 (use-package drag-stuff
@@ -194,7 +196,10 @@
 
 ;; Move to the beginning/end of line or code
 (use-package mwim
-  :defer t)
+  :defer t
+  :general
+  ("C-a" 'mwim-beginning-of-code-or-line)
+  ("C-e" 'mwim-end-of-code-or-line))
 
 (use-package counsel-osx-app
   :defer t)

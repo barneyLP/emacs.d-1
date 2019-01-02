@@ -6,15 +6,10 @@
   :demand t
   :commands (ranger deer deer-jump-other-window ranger-override-dired-mode)
   :init
-  (progn
-    (setq ranger-override-dired t)
-    (kevin/set-leader-keys
-     "jd" 'deer
-     "jr" 'ranger)
-    (eval-after-load 'evil
-      '(progn
-         (evil-define-key 'normal ranger-mode-map (kbd "q") 'ranger-close)))
-    )
+  (setq ranger-override-dired t)
+  (kevin/normal-state-prefix
+    "jd" 'deer
+    "jr" 'ranger)
   :config
   (setq ranger-cleanup-on-disable t)
   (setq ranger-cleanup-eagerly t)

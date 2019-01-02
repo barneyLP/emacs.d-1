@@ -37,6 +37,12 @@
 (use-package bind-key :ensure t)
 (use-package hydra :ensure t)
 (use-package posframe :ensure t)
+(use-package general
+  :ensure t
+  :after which-key
+  :config
+  (general-auto-unbind-keys)
+  (general-create-definer kevin/normal-state-prefix :prefix "C-o"))
 
 (use-package which-key
   :demand t

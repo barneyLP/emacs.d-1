@@ -9,46 +9,47 @@
 (use-package counsel
   :defer t
   :diminish ivy-mode counsel-mode
+  :general
+  ("C-s" 'swiper)
+  ("M-x" 'counsel-M-x)
+  ("C-x C-f" 'counsel-find-file)
+  ("C-x C-r" 'counsel-recentf)
   :init
-  (kevin/set-leader-keys
-   "SPC" 'counsel-M-x
-   "/" 'counsel-rg
-   "ff" 'counsel-find-file
-   "fr" 'counsel-recentf
-   "ss" 'swiper)
-  :bind (("C-s" . swiper)
-         ("C-S-s" . swiper-all)
-         ("C-c C-r" . ivy-resume)
-         ("C-c v" . ivy-push-view)
-         ("C-c V" . ivy-pop-view)
-         :map counsel-mode-map
-         ([remap swiper] . counsel-grep-or-swiper)
-         ("C-x C-r" . counsel-recentf)
-         ("C-x j" . counsel-mark-ring)
-         ("C-c C-p" . counsel-package)
-         ("C-c c L" . counsel-find-library)
-         ("C-c c a" . counsel-apropos)
-         ("C-c c e" . counsel-colors-emacs)
-         ("C-c c f" . counsel-fzf)
-         ("C-c c g" . counsel-grep)
-         ("C-c c h" . counsel-command-history)
-         ("C-c c i" . counsel-git)
-         ("C-c c j" . counsel-git-grep)
-         ("C-c c l" . counsel-load-library)
-         ("C-c c m" . counsel-minibuffer-history)
-         ("C-c c o" . counsel-outline)
-         ("C-c c p" . counsel-pt)
-         ("C-c c r" . counsel-rg)
-         ("C-c c s" . counsel-ag)
-         ("C-c c u" . counsel-unicode-char)
-         ("C-c c w" . counsel-colors-web)
-         :map ivy-minibuffer-map
-         ("C-w" . ivy-yank-word)
-         ([escape] . minibuffer-keyboard-quit)
-         :map counsel-find-file-map
-         ("C-h" . counsel-up-directory)
-         :map swiper-map
-         ("M-%" . swiper-query-replace))
+  (kevin/normal-state-prefix
+    "C-r" 'ivy-resume
+    "/" 'counsel-rg)
+  ;; :bind (("C-S-s" . swiper-all)
+  ;;        ("C-c C-r" . ivy-resume)
+  ;;        ("C-c v" . ivy-push-view)
+  ;;        ("C-c V" . ivy-pop-view)
+  ;;        :map counsel-mode-map
+  ;;        ([remap swiper] . counsel-grep-or-swiper)
+  ;;        ("C-x C-r" . counsel-recentf)
+  ;;        ("C-x j" . counsel-mark-ring)
+  ;;        ("C-c C-p" . counsel-package)
+  ;;        ("C-c c L" . counsel-find-library)
+  ;;        ("C-c c a" . counsel-apropos)
+  ;;        ("C-c c e" . counsel-colors-emacs)
+  ;;        ("C-c c f" . counsel-fzf)
+  ;;        ("C-c c g" . counsel-grep)
+  ;;        ("C-c c h" . counsel-command-history)
+  ;;        ("C-c c i" . counsel-git)
+  ;;        ("C-c c j" . counsel-git-grep)
+  ;;        ("C-c c l" . counsel-load-library)
+  ;;        ("C-c c m" . counsel-minibuffer-history)
+  ;;        ("C-c c o" . counsel-outline)
+  ;;        ("C-c c p" . counsel-pt)
+  ;;        ("C-c c r" . counsel-rg)
+  ;;        ("C-c c s" . counsel-ag)
+  ;;        ("C-c c u" . counsel-unicode-char)
+  ;;        ("C-c c w" . counsel-colors-web)
+  ;;        :map ivy-minibuffer-map
+  ;;        ("C-w" . ivy-yank-word)
+  ;;        ([escape] . minibuffer-keyboard-quit)
+  ;;        :map counsel-find-file-map
+  ;;        ("C-h" . counsel-up-directory)
+  ;;        :map swiper-map
+  ;;        ("M-%" . swiper-query-replace))
   :hook ((after-init . ivy-mode)
          (after-init . counsel-mode))
   :config

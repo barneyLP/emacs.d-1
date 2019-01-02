@@ -15,7 +15,7 @@
              neotree-hide
              neotree-enter)
   :init
-  (kevin/set-leader-keys "ft" 'neotree-toggle)
+  (kevin/normal-state-prefix "ft" 'neotree-toggle)
   (setq neo-create-file-auto-open t
         neo-auto-indent-point nil
         neo-autorefresh t
@@ -40,19 +40,7 @@
           "^\\.\\(sync\\|export\\|attach\\)$"
           "~$" "\\.emacs*"
           "^#.*#$"))
-  :config
-  (when (bound-and-true-p evil-mode)
-    (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-    (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "h") 'neotree-select-up-node)
-    (evil-define-key 'normal neotree-mode-map (kbd "l") 'neotree-change-root)
-    (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-create-node)
-    (evil-define-key 'normal neotree-mode-map (kbd "C") 'neotree-copy-node)
-    (evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-    (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-    (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-rename-node)
-    (evil-define-key 'normal neotree-mode-map (kbd "s") 'neotree-hidden-file-toggle)))
+  )
 
 (provide 'init-filetree)
 ;;; init-filetree ends here

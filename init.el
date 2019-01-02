@@ -48,7 +48,7 @@
 ;; Bootstrap config
 ;;----------------------------------------------------------------------------
 (require 'init-exec-path) ; set up $PATH
-(require 'init-evil)      ; evil mode
+;; (require 'init-evil)      ; evil mode
 (require 'init-better-default)
 
 ;;----------------------------------------------------------------------------
@@ -69,29 +69,29 @@
 
 ;; programming releated packages
 ;; (require 'init-tag)
-(require 'init-prog)
+;; (require 'init-prog)
 (require 'init-company)
 (require 'init-golang)
-(require 'init-python)
-(require 'init-yasnippet)
-(require 'init-markdown)
-(require 'init-org)
-(require 'init-elisp)
+;; (require 'init-python)
+;; (require 'init-yasnippet)
+;; (require 'init-markdown)
+;; (require 'init-org)
+;; (require 'init-elisp)
 (require 'init-imenu)
-(require 'init-persp-mode)
-(require 'init-projectile)
-(require 'init-lua)
-(require 'init-rust)
+;; (require 'init-persp-mode)
+;; (require 'init-projectile)
+;; (require 'init-lua)
+;; (require 'init-rust)
 ;; (require 'init-lsp)
 
 ;; tools
 (require 'init-git)
 (require 'init-buffer)
 (require 'init-flycheck)
-(require 'init-dired)
+;; (require 'init-dired)
 (require 'init-ranger)
-(require 'init-eshell)
-(require 'init-restclient)
+;; (require 'init-eshell)
+;; (require 'init-restclient)
 ;; (require 'init-restore)
 
 (require 'init-windows)

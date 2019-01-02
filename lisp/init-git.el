@@ -53,28 +53,22 @@
 (use-package magit
   :defer t
   :commands (magit-status magit-init magit-file-log magit-blame-mode)
-  :bind
-  (("C-x g i" . magit-init)
-   ("C-x g f" . magit-file-log)
-   ("C-x g b" . magit-blame-mode)
-   ("C-x g m" . magit-branch-manager)
-   ("C-x g c" . magit-branch)
-   ("C-x g s" . magit-status)
-   ("C-x g r" . magit-reflog)
-   ("C-x g t" . magit-tag))
   :init
-  (kevin/declare-prefix "g" "magit")
-  (kevin/set-leader-keys
-   "ga" 'kevin/git-add-current-file
-   "gc" 'kevin/git-checkout-current-file
-   "gd" 'magit-diff-buffer-file
-   "gl" 'magit-log-buffer-file
-   "gi" 'magit-init
-   "gL" 'magit-list-repositories
-   "gs" 'magit-status
-   "gS" 'magit-stage-file
-   "gU" 'magit-unstage-file
-   "gv" 'vc-annotate)
+  (kevin/normal-state-prefix
+    "ga" 'kevin/git-add-current-file
+    "gb" 'magit-blame-mode
+    "gc" 'kevin/git-checkout-current-file
+    "gd" 'magit-diff-buffer-file
+    "gf" 'magit-file-log
+    "gl" 'magit-log-buffer-file
+    "gm" 'magit-branch-manager
+    "gi" 'magit-init
+    "gL" 'magit-list-repositories
+    "gr" 'magit-reflog
+    "gs" 'magit-status
+    "gS" 'magit-stage-file
+    "gU" 'magit-unstage-file
+    "gv" 'vc-annotate)
   :config
   ;; display buffer fullframe
   (setq magit-display-buffer-function #'kevin/magit-display-buffer-function)
@@ -111,14 +105,14 @@
   ;; Use magit-show-commit for showing status/diff commands
   (setq git-messenger:use-magit-popup t)
   (setq git-messenger:show-detail t)
-  (kevin/set-leader-keys "gm"  'git-messenger:popup-message))
+  (kevin/normal-state-prefix "gm"  'git-messenger:popup-message))
 
 ;; Walk through git revisions of a file
 (use-package git-timemachine
   :defer t
   :commands (hydra-git-timemachine/body)
   :init
-  (kevin/set-leader-keys "gt" #'hydra-git-timemachine/body)
+  (kevin/normal-state-prefix "gt" #'hydra-git-timemachine/body)
   ;; (add-hook 'git-timemachine-mode-hook #'evil-force-normal-state)
   (defhydra hydra-git-timemachine (:body-pre (unless (bound-and-true-p git-timemachine-mode)
                                                (call-interactively 'git-timemachine))

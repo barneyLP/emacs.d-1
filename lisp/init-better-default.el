@@ -81,7 +81,8 @@
 
 (use-package expand-region
   :ensure t
-  :bind (("C-=" . er/expand-region)))
+  :general
+  ("C-=" 'er/expand-region))
 
 (use-package url
   :ensure nil

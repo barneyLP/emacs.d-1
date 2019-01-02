@@ -58,7 +58,6 @@
   :mode "\\.go\\'"
   :bind (:map go-mode-map
               ([remap xref-find-definitions] . godef-jump)
-              ("C-c R" . go-remove-unused-imports)
               ("<f1>" . godoc-at-point))
   :config
   (setq gofmt-command "goimports") ; use goimports instead of gofmt
@@ -66,19 +65,23 @@
   (add-hook 'before-save-hook #'gofmt-before-save)
   (make-local-variable 'after-save-hook)
   (add-hook 'after-save-hook #'kevin/revert-buffer-no-confirm)
-  (kevin/declare-prefix-for-mode 'go-mode "mi" "imports")
-  (kevin/set-leader-keys-for-major-mode 'go-mode
-                                        "cj" 'godef-jump
-                                        "ac" #'kevin/go-auto-comment
-                                        "hh" 'godoc-at-point
-                                        "ig" 'go-goto-imports
-                                        "ia" 'go-import-add
-                                        "ir" 'go-remove-unused-imports
-                                        "eb" 'go-play-buffer
-                                        "er" 'go-play-region
-                                        "ed" 'go-download-play
-                                        "ga" 'ff-find-other-file
-                                        "gc" 'go-coverage)
+  (general-define-key
+   :keymaps 'go-mode-map
+   "M-." 'godef-jump)
+  (kevin/normal-state-prefix
+    :keymaps 'go-mode-map
+    "cj" 'godef-jump
+    "ac" #'kevin/go-auto-comment
+    "hh" 'godoc-at-point
+    "ig" 'go-goto-imports
+    "ir" 'go-remove-unused-imports
+    "ia" 'go-import-add
+    "ir" 'go-remove-unused-imports
+    "eb" 'go-play-buffer
+    "er" 'go-play-region
+    "ed" 'go-download-play
+    "ga" 'ff-find-other-file
+    "gc" 'go-coverage)
   ;; ;; Go add-ons for Projectile
   ;; :ensure-system-package
   ;; ((dep . "go get -u github.com/golang/dep/cmd/dep")
@@ -127,19 +130,20 @@
                               go-guru-set-scope)
   :init
   (kevin/declare-prefix-for-mode 'go-mode "mf" "guru")
-  (kevin/set-leader-keys-for-major-mode 'go-mode
-                                        "fd" 'go-guru-describe
-                                        "ff" 'go-guru-freevars
-                                        "fi" 'go-guru-implements
-                                        "fc" 'go-guru-peers
-                                        "fr" 'go-guru-referrers
-                                        "fj" 'go-guru-definition
-                                        "fp" 'go-guru-pointsto
-                                        "fs" 'go-guru-callstack
-                                        "fe" 'go-guru-whicherrs
-                                        "f<" 'go-guru-callers
-                                        "f>" 'go-guru-callees
-                                        "fo" 'go-guru-set-scope))
+  (kevin/normal-state-prefix
+    :keymaps 'go-mode-map
+    "fd" 'go-guru-describe
+    "ff" 'go-guru-freevars
+    "fi" 'go-guru-implements
+    "fc" 'go-guru-peers
+    "fr" 'go-guru-referrers
+    "fj" 'go-guru-definition
+    "fp" 'go-guru-pointsto
+    "fs" 'go-guru-callstack
+    "fe" 'go-guru-whicherrs
+    "f<" 'go-guru-callers
+    "f>" 'go-guru-callees
+    "fo" 'go-guru-set-scope))
 
 (defun kevin/go-test-current-test-verbose()
   "Add -v flag to go test command."
@@ -152,14 +156,14 @@
   :ensure t
   :after go-mode
   :config
-  (kevin/declare-prefix-for-mode 'go-mode "mt" "test")
-  (kevin/set-leader-keys-for-major-mode 'go-mode
-                                        "tx" 'go-run
-                                        "tb" 'go-test-current-benchmark
-                                        "tt" 'go-test-current-test
-                                        "tv" 'kevin/go-test-current-test-verbose
-                                        "tm" 'go-test-current-file
-                                        "tp" 'go-test-current-project))
+  (kevin/normal-state-prefix
+    :keymaps 'go-mode-map
+    "tx" 'go-run
+    "tb" 'go-test-current-benchmark
+    "tt" 'go-test-current-test
+    "tv" 'kevin/go-test-current-test-verbose
+    "tm" 'go-test-current-file
+    "tp" 'go-test-current-project))
 
 (use-package go-imenu
   :ensure t
@@ -170,20 +174,21 @@
   :ensure t
   :after go-mode
   :config
-  (kevin/declare-prefix-for-mode 'go-mode "mr" "refactoring")
-  (kevin/set-leader-keys-for-major-mode 'go-mode
-                                        "rn" 'godoctor-rename
-                                        "re" 'godoctor-extract
-                                        "rt" 'godoctor-toggle
-                                        "rd" 'godoctor-godoc))
+  (kevin/normal-state-prefix
+    :keymaps 'go-mode-map
+    "rn" 'godoctor-rename
+    "re" 'godoctor-extract
+    "rt" 'godoctor-toggle
+    "rd" 'godoctor-godoc))
 
 (use-package go-tag
   :ensure t
   :after go-mode
   :config
-  (kevin/set-leader-keys-for-major-mode 'go-mode
-                                        "rf" 'go-tag-add
-                                        "rF" 'go-tag-remove))
+  (kevin/normal-state-prefix
+    :keymaps 'go-mode-map
+    "rf" 'go-tag-add
+    "rF" 'go-tag-remove))
 
 (defun kevin/setup-go-company-backends ()
   (make-local-variable 'company-backends)

@@ -95,37 +95,38 @@ Including indent-buffer, which should not be called automatically on save."
   (indent-buffer))
 
 ;; buffer related keybindings
-(kevin/declare-prefix "b" "buffer")
-(kevin/set-leader-keys "bb" 'ivy-switch-buffer
-                       "bc" 'kevin/cleanup-buffer
-                       "be" 'eval-buffer
-                       "bd" 'kill-this-buffer
-                       "bD" #'kevin/kill-other-buffers
-                       "bf" 'beginning-of-defun
-                       "bi"  #'kevin/indent-region-or-buffer
-                       "bk" 'kill-buffer
-                       "bl" 'ibuffer-list-buffers
-                       "bm" #'kevin/kill-all-buffers
-                       "bp" #'kevin/switch-to-prev-buffer
-                       "bn" #'kevin/switch-to-next-buffer
-                       "bg" #'kevin/revert-buffer-no-confirm
-                       "bs" 'save-buffer
-                       "bS" #'kevin/create-scratch-buffer)
+
 
 ;; Group ibuffer's list by project root
 (use-package ibuffer-projectile
   :defer t
   :ensure t
-  :bind ("C-x C-b" . ibuffer)
+  :general
+  ("C-x C-b" 'ibuffer)
+  (kevin/normal-state-prefix
+                    "bb" 'ivy-switch-buffer
+                    "bc" 'kevin/cleanup-buffer
+                    "be" 'eval-buffer
+                    "bd" 'kill-this-buffer
+                    "bD" #'kevin/kill-other-buffers
+                    "bf" 'beginning-of-defun
+                    "bi"  #'kevin/indent-region-or-buffer
+                    "bk" 'kill-buffer
+                    "bl" 'ibuffer-list-buffers
+                    "bm" #'kevin/kill-all-buffers
+                    "bp" #'kevin/switch-to-prev-buffer
+                    "bn" #'kevin/switch-to-next-buffer
+                    "bg" #'kevin/revert-buffer-no-confirm
+                    "bs" 'save-buffer
+                    "bS" #'kevin/create-scratch-buffer)
   :init
-  (progn
-    (setq ibuffer-filter-group-name-face 'font-lock-function-name-face)
-    (add-hook 'ibuffer-hook
-              (lambda ()
+  (setq ibuffer-filter-group-name-face 'font-lock-function-name-face)
+  (add-hook 'ibuffer-hook
+            (lambda ()
                 (ibuffer-auto-mode 1)
                 (ibuffer-projectile-set-filter-groups)
                 (unless (eq ibuffer-sorting-mode 'alphabetic)
-                  (ibuffer-do-sort-by-alphabetic))))))
+                  (ibuffer-do-sort-by-alphabetic)))))
 
 
 (defun kevin/auto-save-buffer()

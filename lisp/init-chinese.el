@@ -7,10 +7,10 @@
 (use-package youdao-dictionary
   :defer t
   :ensure t
-  :bind ("C-c y" . 'youdao-dictionary-search-at-point+)
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
+  (kevin/normal-state-prefix "y" 'youdao-dictionary-search-at-point+)
   ;; Set file path for saving search history
   (setq youdao-dictionary-search-history-file (expand-file-name "youdao" kevin-cache-directory))
   ;; Enable Chinese word segmentation support
@@ -20,7 +20,8 @@
 (use-package pyim
   :ensure t
   :demand t
-  :bind (("M-j" . pyim-convert-code-at-point)) ;; 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文
+  :general
+  ("M-j" 'pyim-convert-code-at-point) ;; 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文
   :config
   ;; 激活 basedict 拼音词库
   (use-package pyim-basedict
@@ -115,14 +116,15 @@
   :ensure nil
   :after company
   :load-path "vendor/lisp/english/"
-  :bind ("C-c t e" . 'toggle-company-english-helper))
+  :config
+  (kevin/normal-state-prefix "te" 'toggle-company-english-helper))
 
 ;; https://github.com/manateelazycat/insert-translated-name
 (use-package insert-translated-name
   :ensure nil
   :load-path "vendor/lisp/english/"
-  :bind ("C-c t t" . 'insert-translated-name-insert)
   :config
+  (kevin/normal-state-prefix "tt" 'insert-translated-name-insert)
   (setq insert-translated-name-translate-engine 'youdao)
   (defvar insert-translated-name-camel-style-mode-list
     '(go-mode)))

@@ -35,7 +35,7 @@
   :defer t
   :ensure t
   :init
-  (kevin/set-leader-keys "wo" #'ace-window))
+  (kevin/normal-state-prefix "wo" #'ace-window))
 
 ;;;###autoload
 (defun split-window-below-and-focus ()
@@ -69,17 +69,16 @@
   (defadvice select-window-by-number
       (after golden-ratio-resize-window activate)
     (golden-ratio) nil)
-  (kevin/declare-prefix "w" "window")
   ;; window related keybindings
-  (kevin/set-leader-keys
-   "1"  'select-window-1
-   "2"  'select-window-2
-   "3"  'select-window-3
-   "4"  'select-window-4
-   "wd" 'delete-window
-   "w/" #'split-window-right-and-focus
-   "w-" #'split-window-below-and-focus
-   "wD" 'delete-other-windows))
+  (kevin/normal-state-prefix
+    "1"  'select-window-1
+    "2"  'select-window-2
+    "3"  'select-window-3
+    "4"  'select-window-4
+    "wd" 'delete-window
+    "w/" #'split-window-right-and-focus
+    "w-" #'split-window-below-and-focus
+    "wD" 'delete-other-windows))
 
 ;; Zoom window like tmux
 (use-package zoom-window
@@ -96,7 +95,7 @@
   (setq cwm-frame-internal-border 15)
   (setq cwm-incremental-padding t)
   (setq cwm-left-fringe-ratio 0)
-  (kevin/set-leader-keys "wc" #'centered-window-mode))
+  (kevin/normal-state-prefix "wc" #'centered-window-mode))
 
 ;; ;; Easy window config switching
 ;; (use-package eyebrowse
@@ -109,7 +108,7 @@
   :defer t
   :ensure t
   :init
-  (kevin/set-leader-keys "wr" #'resize-window))
+  (kevin/normal-state-prefix "wr" #'resize-window))
 
 
 (use-package golden-ratio
@@ -129,7 +128,7 @@
           (golden-ratio-mode 1)
           (message "golden ratio enabled")
           (golden-ratio))))
-    (kevin/set-leader-keys "tg" #'kevin/golden-ratio-toggle))
+    (kevin/normal-state-prefix "tg" #'kevin/golden-ratio-toggle))
   :config
   (progn
     ;; golden-ratio-exclude-modes
@@ -213,7 +212,7 @@
   :commands (centered-cursor-mode global-centered-cursor-mode)
   :diminish centered-cursor-mode "⊝"
   :init
-  (kevin/set-leader-keys "t-" 'centered-cursor-mode)
+  (kevin/normal-state-prefix "t-" 'centered-cursor-mode)
   (setq ccm-recenter-at-end-of-file t
         ccm-ignored-commands '(mouse-drag-region
                                mouse-set-point
