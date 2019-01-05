@@ -69,7 +69,7 @@
 
 ;; programming releated packages
 ;; (require 'init-tag)
-;; (require 'init-prog)
+(require 'init-prog)
 (require 'init-company)
 (require 'init-golang)
 ;; (require 'init-python)

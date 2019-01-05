@@ -8,10 +8,11 @@
 ;;; Code:
 
 (use-package dash-at-point
+  :ensure t
   :if kevin-mac-p
   :defer t
-  :bind (("\C-cD" . dash-at-point)
-         ("\C-ce" . dash-at-point-with-docset)))
+  :init
+  (kevin/normal-state-prefix "d" 'dash-at-point))
 
 (use-package prog-mode
   :defer t
@@ -70,12 +71,6 @@
   :defer t
   :mode (("\\.yml\\'" . yaml-mode)))
 
-(use-package quickrun
-  :defer t
-  :ensure t
-  :bind (("<f7>" . quickrun)
-         ("C-c x" . quickrun)))
-
 (use-package json-reformat
   :defer t
   :ensure t
@@ -86,7 +81,6 @@
   :ensure t
   :diminish editorconfig-mode
   :hook (after-init . editorconfig-mode))
-
 
 (provide 'init-prog)
 ;;; init-prog.el ends here
